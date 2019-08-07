@@ -50,3 +50,8 @@ fields:
   config: {}
   label: Multiple Images
   description: List of images
+- name: blog
+  type: text
+  config:
+    required: false
+  label: blog
