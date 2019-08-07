@@ -1,4 +1,52 @@
 ---
 label: post
 hide_body: true
-fields: []
+fields:
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+  hidden: false
+  description: Title of the post
+- name: date
+  type: datetime
+  label: Date
+  description: Date of the post
+  config:
+    required: false
+    date_format: 
+    time_format: 
+    display_utc: false
+- name: description
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Description
+- name: category
+  type: select
+  default: []
+  config:
+    required: false
+    options: []
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Category
+  description: category of the post
+- name: tag
+  type: tag_list
+  default: []
+  label: tag
+  description: 'tag '
+- name: multiple_images
+  type: image_gallery
+  config: {}
+  label: Multiple Images
+  description: List of images
