@@ -16,15 +16,15 @@
 theme: jekyll-theme-so-simple
 # remote_theme: mmistakes/so-simple-theme
 locale: en-US
-title: "My Awesome Site"
-description: "It really is the best."
+title: "Talk Data To Me"
+description: "Just writing about things which fascinates me"
 baseurl: # the subpath of your site, e.g. "/blog"
-url: # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-logo: # path of site logo, e.g. "/images/logo.png"
+url: https://mk556.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+logo: /assets/IMG-20181109-WA0038.jpg # path of site logo, e.g. "/images/logo.png"
 date_format: "%B %-d, %Y"
-read_time: # reading time estimates, e.g. true
-words_per_minute: # 200
-mathjax: # MathJax equations, e.g. true
+read_time: true # reading time estimates, e.g. true
+words_per_minute: 150 # 200
+mathjax: true # MathJax equations, e.g. true
 google_fonts:
   - name: "Source Sans Pro"
     weights: "400,400i,700,700i"
@@ -32,9 +32,9 @@ google_fonts:
     weights: "400,400i,700,700i"
 google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 disqus:
-  shortname: # Disqus shortname, e.g. "my_disqus_shortname"
+  shortname: mk556.disqus.com # Disqus shortname, e.g. "my_disqus_shortname"
 twitter:
-  username: # site's Twitter username, e.g. "mmistakes"
+  username: MananKsh # site's Twitter username, e.g. "mmistakes"
 
 # Liquid
 liquid:
@@ -47,15 +47,15 @@ feed:
   path: atom.xml
 
 # Pagination - https://jekyllrb.com/docs/pagination/
-# paginate: 10
-# paginate_path: /page:num/
+paginate: 10
+paginate_path: /page:num/
 
 # Search
-search_full_content: false # can have performance implications for large sites
+search_full_content: true # can have performance implications for large sites
 
 # Taxonomy pages
-# category_archive_path: "/categories/#"
-# tag_archive_path: "/tags/#"
+category_archive_path: "/categories/#"
+tag_archive_path: "/tags/#"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -87,14 +87,22 @@ defaults:
 
 # Site Author
 author:
-  name:
-  picture:
-  email:
-  twitter:
+  name: Manan Kshatriya
+  picture: /assets/IMG-20181109-WA0038.jpg
+  email: mannykshatriya@gmail.com
+  twitter: MananKsh 
   links:
     - title:
       url:
       icon:
+
+social:
+  name: Manan Kshatriya
+  links:
+    - https://twitter.com/MananKsh
+    - https://www.linkedin.com/in/manan-kshatriya-aa648b154/
+
+copyright: "Trying to repay my debt to the *community*"
 
 # Footer Links
 footer_links:
