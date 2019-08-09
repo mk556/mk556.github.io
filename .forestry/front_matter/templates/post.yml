@@ -56,5 +56,3 @@ fields:
   config:
     required: false
   label: blog
-pages:
-- _posts/2019-08-06-test.md
