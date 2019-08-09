@@ -30,10 +30,13 @@ fields:
   label: Description
 - name: category
   type: select
-  default: []
+  default: ''
   config:
     required: false
-    options: []
+    options:
+    - Setup
+    - Opinion
+    - How-to
     source:
       type: simple
       section: 
@@ -41,18 +44,13 @@ fields:
       path: 
   label: Category
   description: category of the post
-- name: tag
+- name: tags
   type: tag_list
   default: []
-  label: tag
-  description: 'tag '
+  description: tags
+  label: Tags
 - name: multiple_images
   type: image_gallery
   config: {}
   label: Multiple Images
   description: List of images
-- name: blog
-  type: text
-  config:
-    required: false
-  label: blog
