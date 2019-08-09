@@ -1,6 +1,7 @@
 ---
-label: post
-hide_body: true
+label: generic-post-template
+hide_body: false
+display_field: title
 fields:
 - name: title
   type: text
@@ -29,10 +30,13 @@ fields:
   label: Description
 - name: category
   type: select
-  default: []
+  default: ''
   config:
     required: false
-    options: []
+    options:
+    - Setup
+    - Opinion
+    - How-to
     source:
       type: simple
       section: 
@@ -40,20 +44,13 @@ fields:
       path: 
   label: Category
   description: category of the post
-- name: tag
+- name: tags
   type: tag_list
   default: []
-  label: tag
-  description: 'tag '
+  description: tags
+  label: Tags
 - name: multiple_images
   type: image_gallery
   config: {}
   label: Multiple Images
   description: List of images
-- name: blog
-  type: text
-  config:
-    required: false
-  label: blog
-pages:
-- _posts/2019-08-06-test.md
