@@ -19,7 +19,7 @@ locale: en-US
 title: "Talk Data To Me"
 description: "Just writing about things which fascinates me"
 baseurl: # the subpath of your site, e.g. "/blog"
-url: https://mk556.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: "https://mk556.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 logo: /assets/IMG-20181109-WA0038.jpg # path of site logo, e.g. "/images/logo.png"
 date_format: "%B %-d, %Y"
 read_time: true # reading time estimates, e.g. true
@@ -110,3 +110,12 @@ footer_links:
   - title: Feed
     url: atom.xml
     icon: fas fa-rss-square
+  - title: Twitter
+    url: https://twitter.com/MananKsh
+    icon: fab fa-twitter-square
+  - title: GitHub
+    url: https://github.com/mk556
+    icon: fab fa-github-square
+  - title: LinkedIn
+    url: https://www.linkedin.com/in/manan-kshatriya-aa648b154/
+    icon: fab fa-linkedin-square
