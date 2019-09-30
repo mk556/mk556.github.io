@@ -54,3 +54,5 @@ fields:
   config: {}
   label: Multiple Images
   description: List of images
+pages:
+- _posts/running-spark-on-dataproc-and-loading-to-bigquery-using-apache-airflow.md
