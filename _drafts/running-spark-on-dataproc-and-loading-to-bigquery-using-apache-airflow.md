@@ -51,3 +51,5 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
 ) # GoogleCloudStoragePrefixSensor checks GCS for the existence of any BLOB which matches operator's prefix
 {% endraw %}
 ```
+
+Sensors in Airflow are operators which usually wait for a certain entity or certain period of time. Few available sensors are TimeDeltaSensor, file, database row, S3 key, Hive partition etc. Our requirement was that the flow should initialize as soon as the raw data is ready in GCS (uploaded by say x provider). Here I have used GCS Prefix Sensor which makes a synchronous call to GCS and checks if there is any BLOB whose URI matches with specified prefix. If yes, the task state becomes success else it waits for certain period of time before rechecking. `dynamic_date_` _and_ `gcs_prefix_check` are helper functions which builds prefix dynamically. `dynamic_date` function can be used if there is a lag between data arrival and data processing date.
