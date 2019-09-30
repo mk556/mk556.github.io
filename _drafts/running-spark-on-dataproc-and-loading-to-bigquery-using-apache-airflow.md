@@ -98,4 +98,57 @@ stop_cluster_example = DataprocClusterDeleteOperator(
 
 Dataproc cluster create operator is yet another way of creating cluster and makes the same ReST call behind the scenes as a gcloud dataproc cluster create command or GCP Console. Stop cluster takes existing cluster's name and deletes the cluster. Airflow uses Jinja templating and parses `{{ ds }}` as execution date in YYYYMMDD format wherever used, so we can create cluster names based on when it was created and what data it is processing to have a better management and insight.
 
-> Please note that all the parameters available in gcloud command / Console might not be available in Airflow Dataproc operators like adding local-ssds to your cluster during creation. In that case you are better off generating your gcloud dataproc cluster create command and wrapping it with BashOperator in Airflow. 
+> Please note that all the parameters available in gcloud command / Console might not be available in Airflow Dataproc operators like adding local-ssds to your cluster during creation. In that case you are better off generating your gcloud dataproc cluster create command and wrapping it with BashOperator in Airflow.
+
+## Running Spark job
+
+```python 
+{% raw %}
+DATAPROC_SPARK_PROP= {
+"spark.jars.packages":"org.apache.lucene:lucene-core:7.5.0,org.apache.lucene:lucene-queries:7.5.0,org.apache.lucene:lucene-spatial:7.5.0,org.apache.lucene:lucene-spatial:7.5.0,org.apache.lucene:lucene-spatial-extras:7.5.0,org.apache.logging.log4j:log4j-core:2.9.0,org.apache.logging.log4j:log4j-api:2.9.0,org.apache.logging.log4j:log4j-slf4j-impl:2.9.0,org.noggit:noggit:0.8,org.locationtech.jts:jts-core:1.15.0,org.locationtech.spatial4j:spatial4j:0.7,org.postgresql:postgresql:42.2.5,com.aerospike:aerospike-client:4.3.0,com.maxmind.geoip2:geoip2:2.4.0,com.google.cloud:google-cloud-storage:1.87.0",
+'spark.executor.memoryOverhead':'2g',
+'spark.executor.cores':'3',
+"spark.executor.memory":'8g',
+'spark.master':'yarn',
+'spark.driver.userClassPathFirst':'true',
+'spark.executor.userClassPathFirst':'true',
+'spark.yarn.maxAppAttempts':'1'
+} # Dict mentioning Spark job's properties
+
+DATAPROC_SPARK_JARS = ['gs://example-bucket/runnableJars/example-jar.jar']
+
+date_tuple = dynamic_date(3) # Suppose we are processing 3 days ago's data - mimics a lag in arrival and processing of data
+
+run_spark_job = DataProcSparkOperator(
+   dag=dag,
+   arguments=["gs://example-source-bucket/year="+date_tuple['year']+"/month="+date_tuple['month']+"/day="+date_tuple['day']+"/*","gs://example-sink-bucket/dir1/year="+date_tuple['year']+"/month="+date_tuple['month']+"/day="+date_tuple['date']+"/"],
+   region="us-central1",
+   task_id ='example-spark-job',
+   dataproc_spark_jars=DATAPROC_SPARK_JARS,
+   dataproc_spark_properties=DATAPROC_SPARK_PROP,
+   cluster_name='example-{{ ds }}',
+   main_class = '[Path-to-Main-Class]',
+)
+{% endraw %}
+```
+
+You can make a separate dictionary to mention the spark job's properties for readability. Dataproc spark operator makes a synchronous call and submits the spark job. The final step is to append the results of spark job to Google Bigquery for further analysis and querying.
+
+```python 
+{% raw %}
+load_to_bq = GoogleCloudStorageToBigQueryOperator(
+    bucket = "example-bucket",
+    source_objects = ["gs://example-sink-bucket/dir1/year="+date_tuple['year']+"/month="+date_tuple['month']+"/day="+date_tuple['date']+"/*.parquet"],
+    destination_project_dataset_table = 'project-id.dataset.table',
+    source_format = 'PARQUET',
+    write_disposition = 'WRITE_APPEND',
+
+
+) # Takes a list of GCS URIs and loads it to Bigquery
+
+
+gcs_prefix_check >> start_cluster_example >> run_spark_job >> stop_cluster_example >> load_to_bq
+{% endraw %}
+```
+
+You can checkout more airflow scripts on my [repo](https://github.com/mk556/airflow-scripts). 
