@@ -14,13 +14,17 @@ multiple_images:
 - "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
 
 ---
-Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. Today we will explore a pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery. 
+Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. Today we will explore a pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery.
+
+\[object HTMLLIElement\]
 
 So let's get started!
 
-You can find the entire python file [here](https://github.com/mk556/airflow-scripts/blob/master/gcs-dataproc-bigquery.py). In this blog post, I'll go through each component. 
+You can find the entire python file [here](https://github.com/mk556/airflow-scripts/blob/master/gcs-dataproc-bigquery.py). In this blog post, I'll go through each component.
 
 ## GCS Prefix check
+
+[https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47](https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47 "https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47")
 
     def dynamic_date(date_offset):
     
