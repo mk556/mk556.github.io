@@ -26,7 +26,7 @@ You can find the entire python file [here](https://github.com/mk556/airflow-scri
 
 
 
-{% highlight python %}
+```python
 {% raw %}
 def dynamic_date(date_offset):
 
@@ -50,5 +50,5 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
     prefix="dir1/dir2"+gcs_prefix_check(3)
 )
 {% endraw %}
-{% endhighlight %}
+```
 
