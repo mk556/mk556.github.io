@@ -4,6 +4,7 @@ tags:
 - airflow
 - dataproc
 - spark
+- gcp
 title: Running Spark on Dataproc and loading to BigQuery using Apache Airflow
 date: 2019-10-01T04:30:00.000+00:00
 description: The Airflow Script checks Google Cloud Storage for specified directory,
