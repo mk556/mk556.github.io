@@ -151,4 +151,4 @@ gcs_prefix_check >> start_cluster_example >> run_spark_job >> stop_cluster_examp
 {% endraw %}
 ```
 
-You can checkout more airflow scripts on my [repo](https://github.com/mk556/airflow-scripts). 
+You can checkout the full code [here](https://github.com/mk556/airflow-scripts/blob/master/gcs-dataproc-bigquery.py) and more airflow scripts on my [repo](https://github.com/mk556/airflow-scripts). 
