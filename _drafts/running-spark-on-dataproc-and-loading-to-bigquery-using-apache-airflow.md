@@ -53,3 +53,49 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
 ```
 
 Sensors in Airflow are operators which usually wait for a certain entity or certain period of time. Few available sensors are TimeDeltaSensor, file, database row, S3 key, Hive partition etc. Our requirement was that the flow should initialize as soon as the raw data is ready in GCS (uploaded by say x provider). Here I have used GCS Prefix Sensor which makes a synchronous call to GCS and checks if there is any BLOB whose URI matches with specified prefix. If yes, the task state becomes success else it waits for certain period of time before rechecking. `dynamic_date_` _and_ `gcs_prefix_check` are helper functions which builds prefix dynamically. `dynamic_date` function can be used if there is a lag between data arrival and data processing date.
+
+## Start and Stop Dataproc Cluster
+
+```python 
+{% raw %}
+start_cluster_example = DataprocClusterCreateOperator(
+        dag=dag,
+        task_id='start_cluster_example',
+        cluster_name='example-{{ ds }}',
+        project_id= "your-project-id",
+        num_workers=2,
+        num_preemptible_workers=4,
+        master_machine_type='n1-standard-4',
+        worker_machine_type='n1-standard-4c',
+        worker_disk_size=300,
+        master_disk_size=300,
+        image_version='1.4-debian9',
+        init_actions_uris=['gs://bootscripts-bucket/bootstrap_scripts/bootstrap-gcp.sh'],
+        tags=['allow-dataproc-internal'],
+        region="us-central1",
+        zone='us-central1-c',#Variable.get('gc_zone'),
+        storage_bucket = "dataproc-example-staging",
+        labels = {'product' : 'sample-label'},
+        service_account_scopes = ['https://www.googleapis.com/auth/cloud-platform'],
+        properties={"yarn:yarn.nodemanager.resource.memory-mb" : 15360,"yarn:yarn.scheduler.maximum-allocation-mb" : 15360},
+        subnetwork_uri="projects/project-id/regions/us-central1/subnetworks/dataproc-subnet",
+        retries= 1,
+        retry_delay=timedelta(minutes=1),
+
+    ) #starts a dataproc cluster
+
+
+stop_cluster_example = DataprocClusterDeleteOperator(
+    dag=dag,
+    task_id='stop_cluster_example',
+    cluster_name='example-{{ ds }}',
+    project_id="your-project-id",
+    region="us-central1",
+    ) #stops a running dataproc cluster
+    
+{% endraw %}
+```
+
+Dataproc cluster create operator is yet another way of creating cluster and makes the same ReST call behind the scenes as a gcloud dataproc cluster create command or GCP Console. Stop cluster takes existing cluster's name and deletes the cluster. Airflow uses Jinja templating and parses `{{ ds }}` as execution date in YYYYMMDD format wherever used, so we can create cluster names based on when it was created and what data it is processing to have a better management and insight. 
+
+local ssds -
