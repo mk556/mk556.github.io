@@ -24,26 +24,26 @@ You can find the entire python file [here](https://github.com/mk556/airflow-scri
 
 ## GCS Prefix check
 
-[https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47](https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47 "https://github.com/mk556/airflow-scripts/blob/4f7793c82c63db7934f9804c899f361138c45024/gcs-dataproc-bigquery.py#L26-L47")
+```python
+def dynamic_date(date_offset):
 
-    def dynamic_date(date_offset):
-    
-        date_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%d\") }}"
-        month_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%m\") }}"
-        year_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%Y\") }}"
-    
-        return {"date":date_config,"month":month_config,"year":year_config}
-    
-    
-    def gcs_prefix_check(date_offset):
-    
-        date_dict = dynamic_date(date_offset)
-        return date_dict["year"]+"/"+date_dict["month"]+"/"+date_dict["date"]
-    
-    
-    gcs_prefix_check = GoogleCloudStoragePrefixSensor(
-        dag=dag,
-        task_id="gcs_prefix_check",
-        bucket="example-bucket",
-        prefix="dir1/dir2"+gcs_prefix_check(3)
-    )
+    date_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%d\") }}"
+    month_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%m\") }}"
+    year_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%Y\") }}"
+
+    return {"date":date_config,"month":month_config,"year":year_config}
+
+
+def gcs_prefix_check(date_offset):
+
+    date_dict = dynamic_date(date_offset)
+    return date_dict["year"]+"/"+date_dict["month"]+"/"+date_dict["date"]
+
+
+gcs_prefix_check = GoogleCloudStoragePrefixSensor(
+    dag=dag,
+    task_id="gcs_prefix_check",
+    bucket="example-bucket",
+    prefix="dir1/dir2"+gcs_prefix_check(3)
+)
+```
