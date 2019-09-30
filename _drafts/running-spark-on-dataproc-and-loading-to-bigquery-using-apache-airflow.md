@@ -5,7 +5,7 @@ tags:
 - dataproc
 - spark
 title: Running Spark on Dataproc and loading to BigQuery using Apache Airflow
-date: 2019-10-01 10:00:00 +0530
+date: 2019-10-01T04:30:00.000+00:00
 description: The Airflow Script checks Google Cloud Storage for specified directory,
   creates a Dataproc cluster, runs a spark job and loads the output of Spark to Google
   Bigquery.
@@ -25,6 +25,7 @@ You can find the entire python file [here](https://github.com/mk556/airflow-scri
 ## GCS Prefix check
 
 ```python
+{% raw %}
 def dynamic_date(date_offset):
 
     date_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%d\") }}"
@@ -46,4 +47,5 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
     bucket="example-bucket",
     prefix="dir1/dir2"+gcs_prefix_check(3)
 )
+{% endraw %}
 ```
