@@ -96,6 +96,6 @@ stop_cluster_example = DataprocClusterDeleteOperator(
 {% endraw %}
 ```
 
-Dataproc cluster create operator is yet another way of creating cluster and makes the same ReST call behind the scenes as a gcloud dataproc cluster create command or GCP Console. Stop cluster takes existing cluster's name and deletes the cluster. Airflow uses Jinja templating and parses `{{ ds }}` as execution date in YYYYMMDD format wherever used, so we can create cluster names based on when it was created and what data it is processing to have a better management and insight. 
+Dataproc cluster create operator is yet another way of creating cluster and makes the same ReST call behind the scenes as a gcloud dataproc cluster create command or GCP Console. Stop cluster takes existing cluster's name and deletes the cluster. Airflow uses Jinja templating and parses `{{ ds }}` as execution date in YYYYMMDD format wherever used, so we can create cluster names based on when it was created and what data it is processing to have a better management and insight.
 
-local ssds -
+> Please note that all the parameters available in gcloud command / Console might not be available in Airflow Dataproc operators like adding local-ssds to your cluster during creation. In that case you are better off generating your gcloud dataproc cluster create command and wrapping it with BashOperator in Airflow. 
