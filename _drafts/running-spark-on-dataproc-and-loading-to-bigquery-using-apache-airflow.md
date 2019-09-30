@@ -24,8 +24,9 @@ You can find the entire python file [here](https://github.com/mk556/airflow-scri
 
 ## GCS Prefix check
 
-```python
+
 {% raw %}
+{% highlight python %}
 def dynamic_date(date_offset):
 
     date_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%d\") }}"
@@ -47,5 +48,5 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
     bucket="example-bucket",
     prefix="dir1/dir2"+gcs_prefix_check(3)
 )
+{% endhighlight %}
 {% endraw %}
-```
