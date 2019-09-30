@@ -16,7 +16,7 @@ multiple_images:
 ---
 Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. Today we will explore a pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery.
 
-\[object HTMLLIElement\]
+![](/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg)
 
 So let's get started!
 
