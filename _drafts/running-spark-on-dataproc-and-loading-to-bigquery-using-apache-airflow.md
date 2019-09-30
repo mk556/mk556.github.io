@@ -24,11 +24,10 @@ You can find the entire python file [here](https://github.com/mk556/airflow-scri
 
 ## GCS Prefix check
 
-
-
 ```python
 {% raw %}
 def dynamic_date(date_offset):
+    ''' subtracts date_offset from execution_date and returns a tuple'''
 
     date_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%d\") }}"
     month_config = "{{ (execution_date - macros.timedelta(days="+str(date_offset)+")).strftime(\"%m\") }}"
@@ -38,6 +37,7 @@ def dynamic_date(date_offset):
 
 
 def gcs_prefix_check(date_offset):
+    ''' returns string in format YYYY/MM/DD emulating sample directory structure in GCS'''
 
     date_dict = dynamic_date(date_offset)
     return date_dict["year"]+"/"+date_dict["month"]+"/"+date_dict["date"]
@@ -48,7 +48,6 @@ gcs_prefix_check = GoogleCloudStoragePrefixSensor(
     task_id="gcs_prefix_check",
     bucket="example-bucket",
     prefix="dir1/dir2"+gcs_prefix_check(3)
-)
+) # GoogleCloudStoragePrefixSensor checks GCS for the existence of any BLOB which matches operator's prefix
 {% endraw %}
 ```
-
