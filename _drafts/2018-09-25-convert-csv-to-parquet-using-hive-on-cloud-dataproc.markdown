@@ -1,10 +1,10 @@
 ---
-layout:	post
-title:	"Convert CSV to Parquet using Hive on Cloud Dataproc"
-date:	2018-09-25
----
+layout: post
+title: Convert CSV to Parquet using Hive on Cloud Dataproc
+date: 2018-09-25
 
-  ![](/img/0*gSryApDZXvZP0r0L.jpg)We were recently working with a leading international voice carrier firm headquartered in US, which wanted to build a Data Warehouse on Google BigQuery.
+---
+![](/img/0*gSryApDZXvZP0r0L.jpg)We were recently working with a leading international voice carrier firm headquartered in US, which wanted to build a Data Warehouse on Google BigQuery.
 
 We were provided with 40 gzipped CSV files with most of them sized ~25GB and few of them around 110GB.
 
@@ -86,5 +86,3 @@ You don’t need to specify the schema when loading Parquet file because it is a
 A huge shout-out to [RK Kuppala](https://medium.com/u/5866d707938) for providing the crucial guidance and support along the way.
 
 Voila! Hope this post helped you :)
-
-  
