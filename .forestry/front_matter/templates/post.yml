@@ -61,6 +61,4 @@ fields:
   label: image
   description: desciption
 pages:
-- _posts/2019-10-02-test.md
-- _posts/convert-csv-to-parquet-on-cloud-dataproc.md
 - _posts/2019-10-01-running-spark-on-dataproc-and-loading-to-bigquery-using-apache-airflow.md
