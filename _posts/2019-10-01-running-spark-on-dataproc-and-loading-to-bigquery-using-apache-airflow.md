@@ -15,7 +15,8 @@ multiple_images:
 - "/uploads/airflow-dataproc-bigquery.jpeg"
 - "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
 image:
-  path: "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
+  path: /uploads/mahkeo-weaNmPm4TqA-unsplash.jpg
+  thumbnail: /uploads/airflow-dataproc-bigquery.jpeg
   caption: "[Underground](https://unsplash.com/photos/weaNmPm4TqA) at [Unsplash](https://unsplash.com)"
 
 ---
