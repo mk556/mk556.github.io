@@ -9,7 +9,9 @@ date: 2018-09-18 09:00:00 +0530
 description: Convert CSV to Parquet using Hive external tables on Cloud Dataproc
 category: How-to
 multiple_images: []
-image: "/uploads/harley-davidson-zGzXsJUBQfs-unsplash.jpg"
+image: 
+  path: /uploads/harley-davidson-zGzXsJUBQfs-unsplash.jpg
+  thumbnail: /img/0*gSryApDZXvZP0r0L.jpg
 
 ---
 ![](/img/0*gSryApDZXvZP0r0L.jpg)
@@ -80,7 +82,9 @@ _Submitting a job via Web UI:_
 2. Click the more options button (three vertical dots) associated with the script.
 3. Click Copy and copy the line under Source.
 
-![](/img/1*WhLPBBlUnx5Jli1JKsgvTQ.png)Then, head over to Big Data -> Dataproc -> Jobs and click on Submit Job.
+![](/img/1*WhLPBBlUnx5Jli1JKsgvTQ.png)
+
+Then, head over to Big Data -> Dataproc -> Jobs and click on Submit Job.
 
 1. Set Job ID and select Region as us-central1
 2. Set Cluster as ‘csv-parq-hive’
@@ -96,6 +100,7 @@ You can click on the job name for the details. A successful run would look somet
 After the job is completed, you can flicker back to your bucket to see the output. Click Refresh Bucket and head over to ‘gs://<YOUR_BUCKET_NAME>/bike-sharing-test-data/par_bike_sharing_test_data’. It’ll look something like this :
 
 ![](/img/1*8ZzBdHhhUP1JOt-AzE790w.png)
+
 Now we’ll head towards the final ‘cherry-on-top’ step and load the parquet file into Google Bigquery:
 
 1. Go to Bigquery and click Create Table.
