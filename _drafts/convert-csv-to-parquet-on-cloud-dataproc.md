@@ -4,7 +4,7 @@ tags:
 - hive
 - csv
 - parquet
-title: Convert CSV to Parquet on Cloud Dataproc
+title: Convert CSV to Parquet using Hive on Cloud Dataproc
 date: 2018-09-18 09:00:00 +0530
 description: Convert CSV to Parquet using Hive external tables on Cloud Dataproc
 category: How-to
