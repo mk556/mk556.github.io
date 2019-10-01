@@ -13,11 +13,10 @@ description: The Airflow Script checks Google Cloud Storage for specified direct
 category: How-to
 multiple_images:
 - "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
+image: "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
 
 ---
 Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. Today we will explore a pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery.
-
-![https://unsplash.com/photos/weaNmPm4TqA](/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg "Underground ")
 
 So let's get started!
 
