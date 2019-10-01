@@ -54,6 +54,12 @@ fields:
   config: {}
   label: Multiple Images
   description: List of images
+- name: image
+  type: file
+  config:
+    maxSize: 250
+  label: image
+  description: desciption
 pages:
 - _posts/convert-csv-to-parquet-on-cloud-dataproc.md
 - _posts/2019-10-01-running-spark-on-dataproc-and-loading-to-bigquery-using-apache-airflow.md
