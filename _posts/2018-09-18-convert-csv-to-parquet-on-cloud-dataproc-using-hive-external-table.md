@@ -14,7 +14,7 @@ image:
   thumbnail: /img/0*gSryApDZXvZP0r0L.jpg
 
 ---
-![](/img/0*gSryApDZXvZP0r0L.jpg)
+
 
 We were recently working with a leading international voice carrier firm headquartered in US, which wanted to build a Data Warehouse on Google BigQuery.
 
