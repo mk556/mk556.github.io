@@ -19,7 +19,7 @@ image:
   caption: "[Underground](https://unsplash.com/photos/weaNmPm4TqA) at [Unsplash](https://unsplash.com)"
 
 ---
-Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. This blog post showcases an airflow pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery. 
+Apache Airflow is an popular open-source orchestration tool having lots of connectors to popular services and all major clouds. This blog post showcases an airflow pipeline which automates the flow from incoming data to Google Cloud Storage, Dataproc cluster administration, running spark jobs and finally loading the output of spark jobs to Google BigQuery.
 
 {% include image.html url="/uploads/airflow-dataproc-bigquery.jpeg" description="Arch diagram" %}
 
@@ -157,3 +157,8 @@ gcs_prefix_check >> start_cluster_example >> run_spark_job >> stop_cluster_examp
 ```
 
 You can checkout the full code [here](https://github.com/mk556/airflow-scripts/blob/master/gcs-dataproc-bigquery.py) and more airflow scripts on my [repo](https://github.com/mk556/airflow-scripts).
+
+## References:
+
+1. [http://airflow.apache.org/integration.html?#gcp-google-cloud-platform](http://airflow.apache.org/integration.html?#gcp-google-cloud-platform "http://airflow.apache.org/integration.html?#gcp-google-cloud-platform")
+2. [https://cloud.google.com/sdk/gcloud/reference/dataproc/](https://cloud.google.com/sdk/gcloud/reference/dataproc/ "https://cloud.google.com/sdk/gcloud/reference/dataproc/")
