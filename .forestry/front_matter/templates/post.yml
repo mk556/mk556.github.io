@@ -28,22 +28,6 @@ fields:
     schema:
       format: markdown
   label: Description
-- name: category
-  type: select
-  default: ''
-  config:
-    required: false
-    options:
-    - Setup
-    - Opinion
-    - How-to
-    source:
-      type: simple
-      section: 
-      file: 
-      path: 
-  label: Category
-  description: category of the post
 - name: tags
   type: tag_list
   default: []
@@ -60,6 +44,12 @@ fields:
     maxSize: 250
   label: image
   description: desciption
+- name: category
+  type: text
+  config:
+    required: false
+  label: Category
+  description: category
 pages:
 - _posts/2018-09-18-convert-csv-to-parquet-on-cloud-dataproc-using-hive-external-table.md
 - _posts/2019-10-01-running-spark-on-dataproc-and-loading-to-bigquery-using-apache-airflow.md
