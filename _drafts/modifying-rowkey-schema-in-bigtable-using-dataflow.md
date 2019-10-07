@@ -30,6 +30,8 @@ That being said, let's see how we will achieve this -
 2. Creating a empty table in Bigtable which will contain rows with updated rowkey (Alternatively, you can create a new Bigtable cluster as well, if you don't want it to affect your existing Bigtable).
 3. Importing Bigtable's rows dump from GCS to new empty table after modifying a little code of [GCS to Bigtable template](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloud-storage-avro-to-cloud-bigtable) and launching this as Cloud Dataflow job.
 
+![](/uploads/changing-rowkey-bigtable.jpeg)
+
 Let's start -
 
 1. We can launch the export job (Bigtable to GCS) directly from GCP console. Go to **Big data -> Dataflow -> Create Job from template.** You can fill out the details as shown below -
