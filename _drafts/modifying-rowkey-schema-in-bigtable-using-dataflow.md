@@ -17,9 +17,19 @@ image caption - Photo by [Will B](https://unsplash.com/@willbro?utm_source=unspl
 
 Cloud Bigtable is a petabyte-scale, fully managed NoSQL database service in GCP for large analytical and operational workloads. It supports the open source industry standard [HBase API](https://hbase.apache.org/), and has integrations with GraphDBs, TSDBs, Geospatial DBs ( [link](https://cloud.google.com/bigtable/docs/integrations) ). Actually, Bigtable was initially released in 2005, but wasn't available to general public until 2015. Apache HBase was created based on Google's publication [Bigtable: A Distributed Storage System for Structured Data](http://research.google.com/archive/bigtable.html) with initial release in 2008.
 
-Bigtable has only one primary index known as Rowkey which can look like 'Field1#Field2#Field3', if you decide to have multi-value rowkey. A rowkey is designed with keeping future queries in mind. A rowkey is optimized for one type of query and cannot perform optimally for all queries. In the sample rowkey above, priority relationship is Field1 > Field2 > Field3, meaning, you can fire queries saying give me all the rows for which Field1 is 'abc' but you cannot say give me all rows with Field2 = 'abc'. Ideally, to get most out of Bigtable, you should give specific value of 
+Bigtable has only one primary index known as rowkey which can look like 'Field1#Field2#Field3', if you decide to have multi-value rowkey. A rowkey should be designed with keeping future queries in mind. I'll not go deep into things to keep in mind while designing the rowkey - you can find it [here](https://cloud.google.com/bigtable/docs/schema-design) and [designing rowkey for time series data](https://cloud.google.com/bigtable/docs/schema-design-time-series).
 
-You can read more about designing a rowkey [here](https://cloud.google.com/bigtable/docs/schema-design) and things to keep in mind while [designing rowkey for time series data](https://cloud.google.com/bigtable/docs/schema-design-time-series). 
+There can be several instances where you need to modify your rowkey - first being load testing several rowkeys and figuring out the best one for you. Also, A table with particular rowkey can serve only one type of query better, you might want to store the same data with different rowkey for another type of queries to perform efficiently.
+
+That being said, let's see how we will achieve this -
+
+1. Exporting Bigtable data to GCS in Avro format by launching this open source Cloud Dataflow job ([Bigtable-to-GCS-avro](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloudbigtabletoavrofile)).
+2. Creating a empty table in Bigtable which will contain rows with updated rowkey (Alternatively, you can create a new Bigtable cluster as well, if you don't want it to affect your existing Bigtable).
+3. Importing Bigtable's rows dump from GCS to new empty table after modifying a little code of [GCS to Bigtable template](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloud-storage-avro-to-cloud-bigtable) and launching this as Cloud Dataflow job.
+
+Let's start - 
+
+1. We can launch the export job directly from GCP console 
 
 ## References
 
