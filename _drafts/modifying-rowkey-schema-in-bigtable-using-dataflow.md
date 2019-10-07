@@ -8,7 +8,10 @@ title: Modifying Rowkey (Schema) in Bigtable using Dataflow
 date: 2019-10-03 18:00:00 +0530
 description: Changing the rowkey in Bigtable using dataflow
 multiple_images:
+- "/uploads/max-workers-dataflow-template.jpg"
 - "/uploads/changing-rowkey-bigtable.jpeg"
+- "/uploads/Create Dataflow job from template - searce-sandbox - Google Cloud Platform
+  2019-10-07 13-33-21.jpg"
 image: "/uploads/will-b-UXKNbZjHCyw-unsplash.jpg"
 category: bigtable
 
@@ -27,9 +30,21 @@ That being said, let's see how we will achieve this -
 2. Creating a empty table in Bigtable which will contain rows with updated rowkey (Alternatively, you can create a new Bigtable cluster as well, if you don't want it to affect your existing Bigtable).
 3. Importing Bigtable's rows dump from GCS to new empty table after modifying a little code of [GCS to Bigtable template](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloud-storage-avro-to-cloud-bigtable) and launching this as Cloud Dataflow job.
 
-Let's start - 
+Let's start -
 
-1. We can launch the export job directly from GCP console 
+1. We can launch the export job (Bigtable to GCS) directly from GCP console. Go to **Big data -> Dataflow -> Create Job from template.** You can fill out the details as shown below -
+
+   ![](/uploads/Create Dataflow job from template - searce-sandbox - Google Cloud Platform 2019-10-07 13-33-21.jpg)
+
+You can set the max-workers property to 10 and and instance type to n1-standard-4.
+
+> I recommend using minimum n1-standard-2 as I faced OutOfMemory errors while using n1-standard-1 workers in Dataflow job.
+
+> Also, number of vCPUs (workers * vCPU per machine) should be proportional to number of Bigtable nodes else it would lead to either over-utilization (Too many workers reading from small Bigtable cluster ) or under-utilization (small number of workers reading from relatively larger Bigtable cluster - resulting in more execution time).
+
+For my use case, I had to take dump of 500GB table in Bigtable. I increased Bigtable nodes to 12 and instance-type = n1-standard-4 and max-workers to 10. The export job took around \~45 mins. 
+
+> Note : If you don't set max-workers to any number. Dataflow can scale exponentially to 600 or 700 VMs based on size of your table. So, it's good practice to have an upper bound on max VMs
 
 ## References
 
