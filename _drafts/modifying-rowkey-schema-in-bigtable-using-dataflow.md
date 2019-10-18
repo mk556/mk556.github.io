@@ -26,27 +26,36 @@ There can be several instances where you need to modify your rowkey - first bein
 
 That being said, let's see how we will achieve this -
 
-1. Exporting Bigtable data to GCS in Avro format by launching this open source Cloud Dataflow job ([Bigtable-to-GCS-avro](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloudbigtabletoavrofile)).
-2. Creating a empty table in Bigtable which will contain rows with updated rowkey (Alternatively, you can create a new Bigtable cluster as well, if you don't want it to affect your existing Bigtable).
-3. Importing Bigtable's rows dump from GCS to new empty table after modifying a little code of [GCS to Bigtable template](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloud-storage-avro-to-cloud-bigtable) and launching this as Cloud Dataflow job.
+1. Exporting Bigtable data to GCS in Avro format by instantiating an open source Cloud Dataflow template ([Bigtable-to-GCS-avro](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloudbigtabletoavrofile)).
+2. Creating a empty table in Bigtable which will contain rows with updated rowkey (Alternatively, you can create the new table in a separate Bigtable cluster, if you don't want it to affect your existing cluster).
+3. Importing Bigtable's rows dump from GCS to new empty table after modifying the template code ( [GCS to Bigtable template](https://cloud.google.com/dataflow/docs/guides/templates/provided-batch#cloud-storage-avro-to-cloud-bigtable) ) and launching it as Cloud Dataflow job.
+
+The overall flow looks like this - 
 
 ![](/uploads/changing-rowkey-bigtable.jpeg)
 
 Let's start -
 
-1. We can launch the export job (Bigtable to GCS) directly from GCP console. Go to **Big data -> Dataflow -> Create Job from template.** You can fill out the details as shown below -
+1. Launch export job from Bigtable to GCS in Avro -   
+   We can launch the export job (Bigtable to GCS) directly from GCP console. Go to **Big data -> Dataflow -> Create Job from template.** You can fill out the details as shown below -
 
    ![](/uploads/Create Dataflow job from template - searce-sandbox - Google Cloud Platform 2019-10-07 13-33-21.jpg)
 
 You can set the max-workers property to 10 and and instance type to n1-standard-4.
 
+![](/uploads/max-workers-dataflow-template.jpg)
+
 > I recommend using minimum n1-standard-2 as I faced OutOfMemory errors while using n1-standard-1 workers in Dataflow job.
 
 > Also, number of vCPUs (workers * vCPU per machine) should be proportional to number of Bigtable nodes else it would lead to either over-utilization (Too many workers reading from small Bigtable cluster ) or under-utilization (small number of workers reading from relatively larger Bigtable cluster - resulting in more execution time).
 
-For my use case, I had to take dump of 500GB table in Bigtable. I increased Bigtable nodes to 12 and instance-type = n1-standard-4 and max-workers to 10. The export job took around \~45 mins. 
+For my use case, I had to take dump of 500GB table in Bigtable. I increased Bigtable cluster's nodes to 12 and kept instance-type as _n1-standard-4_ and max-workers to 10. The export job took around \~45 mins.
 
-> Note : If you don't set max-workers to any number. Dataflow can scale exponentially to 600 or 700 VMs based on size of your table. So, it's good practice to have an upper bound on max VMs
+> Note : If you don't set max-workers to any number. Dataflow can scale exponentially to 600 or 700 VMs based on size of your table. So, it's good practice to have an upper bound on max VMs. 
+
+Launch the export job. 
+
+2. 
 
 ## References
 
