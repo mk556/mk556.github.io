@@ -12,7 +12,11 @@ multiple_images:
 - "/uploads/changing-rowkey-bigtable.jpeg"
 - "/uploads/Create Dataflow job from template - searce-sandbox - Google Cloud Platform
   2019-10-07 13-33-21.jpg"
-image: "/uploads/will-b-UXKNbZjHCyw-unsplash.jpg"
+image: 
+  path: /uploads/will-b-UXKNbZjHCyw-unsplash.jpg
+  thumbnail: /uploads/changing-rowkey-bigtable.jpeg
+  caption: "image caption - Photo by [Will B](https://unsplash.com/@willbro?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/wide?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+"
 category: bigtable
 
 ---
