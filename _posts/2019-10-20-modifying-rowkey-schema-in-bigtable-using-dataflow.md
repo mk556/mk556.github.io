@@ -15,7 +15,7 @@ multiple_images:
 image: 
   path: /uploads/will-b-UXKNbZjHCyw-unsplash.jpg
   thumbnail: /uploads/changing-rowkey-bigtable.jpeg
-  caption: "image caption - Photo by [Will B](https://unsplash.com/@willbro?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/wide?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  caption: "Photo by [Will B](https://unsplash.com/@willbro?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/wide?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 "
 category: bigtable
 
