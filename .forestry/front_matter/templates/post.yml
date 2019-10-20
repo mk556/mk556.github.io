@@ -51,6 +51,6 @@ fields:
   label: Category
   description: category
 pages:
-- _posts/modifying-rowkey-schema-in-bigtable-using-dataflow.md
+- _posts/2019-10-20-modifying-rowkey-schema-in-bigtable-using-dataflow.md
 - _posts/2018-09-18-convert-csv-to-parquet-on-cloud-dataproc-using-hive-external-table.md
 - _posts/2019-10-01-running-spark-on-dataproc-and-loading-to-bigquery-using-apache-airflow.md
