@@ -10,7 +10,7 @@ date: 2019-10-01T04:30:00.000+00:00
 description: The Airflow Script checks Google Cloud Storage for specified directory,
   creates a Dataproc cluster, runs a spark job and loads the output of Spark to Google
   Bigquery.
-category: airflow
+category: how-to
 multiple_images:
 - "/uploads/airflow-dataproc-bigquery.jpeg"
 - "/uploads/mahkeo-weaNmPm4TqA-unsplash.jpg"
